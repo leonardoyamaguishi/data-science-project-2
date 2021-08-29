@@ -1,7 +1,8 @@
 import json
 import plotly
 import pandas as pd
-#import joblib
+import joblib
+import numpy as np
 
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
@@ -48,28 +49,103 @@ def index():
     
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
-    genre_counts = df.groupby('genre').count()['message']
-    genre_names = list(genre_counts.index)
     
+    '''
+    Plot 1 - Bar Chart with the count per category in the model dataset
+    '''
+
+    # Listing category names
+    category_names = df.columns[4:]
+
+    # Counting the occurence of each category
+    # Filtering the Category Names from the DataFrame, converting to np array and summing
+    category_count = df[category_names].to_numpy().sum(axis = 0)
+    
+    '''
+    Plot 2 - Horizontal Bar Chart with the Feature Importance of words
+    '''
+    # Retrieving the Random Forest Classifier
+    pipeline_estimators = model.best_estimator_['clf']
+    # Retrieving a list of the estimators that compose the Random Forest Classifier
+    rfc_estimators = pipeline_estimators.estimators_
+
+    # Retrieving the Model Vocabulary to label the features
+    model_vocabulary = model.best_estimator_['transformer'].vocabulary_
+    model_vocabulary_keys = model_vocabulary.keys()
+
+    # Creating a DataFrame with the Feature Importance for each classifier
+    feature_importance_dict = {}
+
+    for i in range(0,len(category_names)):
+        feature_importance_dict[i] = rfc_estimators[i].feature_importances_
+
+    feature_importance_df = pd.DataFrame(feature_importance_dict, index = model_vocabulary_keys)
+
+    # Inserting buttons for each trained classifier
+    # The buttons must refresh the visualization inserting the top 40 most important features for the classification
+
+    buttons = []
+
+    for i in range(0,len(category_names)):
+        buttons.append(dict(method='update',
+                            label=category_names[i],
+                            visible=True,
+                            args=[{'y':[feature_importance_df[feature_importance_df.columns[i]].sort_values(ascending = False)[0:40].index],
+                                'x':[feature_importance_df[feature_importance_df.columns[i]].sort_values(ascending = False)[0:40]],
+                                'type':'bar'}, [0]],
+                            )
+                    )
+
+    # Setting the update menu
+    updatemenu = [{'buttons': buttons,
+                'direction' : 'down',
+                'showactive' : True
+                }]
+
+    '''
+    Create visuals
+    '''
+
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
                 Bar(
-                    x=genre_names,
-                    y=genre_counts
+                    x=category_names,
+                    y=category_count
                 )
             ],
 
             'layout': {
-                'title': 'Distribution of Message Genres',
+                'title': 'Distribution of Category Count',
                 'yaxis': {
                     'title': "Count"
                 },
                 'xaxis': {
-                    'title': "Genre"
+                    'title': "Category"
                 }
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=feature_importance_df[feature_importance_df.columns[0]].sort_values(ascending = False)[0:40], 
+                    y=feature_importance_df[feature_importance_df.columns[0]].sort_values(ascending = False)[0:40].index, 
+                    orientation = 'h'
+                )
+            ],
+
+            'layout': {
+                'title': 'Trained model word feature importance',
+                'yaxis': {
+                    'title': "Word"
+                },
+                'xaxis': {
+                    'title': "Feature Importance"
+                },
+                'showlegends' : False,
+                'updatemenus' : updatemenu
             }
         }
     ]
@@ -101,8 +177,7 @@ def go():
 
 
 def main():
-    #app.run(host='0.0.0.0', port=3001, debug=True)
-    app.run()
+    app.run(host='0.0.0.0', port=3001, debug=True)
 
 
 if __name__ == '__main__':
