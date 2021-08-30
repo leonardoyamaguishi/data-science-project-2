@@ -44,17 +44,29 @@ This is the second project from Udacity's Data Science Nanodegree. The objective
 
 ## References:
 [1] PYTHON. Python. Available in: https://www.python.org.
+
 [2] SYS. sys. Available in: https://docs.python.org/3/library/sys.html
+
 [3] PANDAS. Pandas. Available in: https://pandas.pydata.org
+
 [4] NUMPY. NumPy. Available in: https://numpy.org
+
 [5] SQLITE3. SQLite3. Available in: https://docs.python.org/3/library/sqlite3.html
+
 [6] PICKLE. Pickle. Avalable in: https://docs.python.org/3/library/pickle.html
+
 [7] NATURAL LANGUAGE TOOLKIT. Natural Language Toolkit. Available in: https://www.nltk.org
+
 [8] SCIKIT-LEARN. Scikit-learn. Available in: https://scikit-learn.org/stable/
+
 [9] JUPYTER NOTEBOOK. Jupyter Notebook. Available in: https://jupyter.org
+
 [10] PLOTLY. plotly. Available in: https://plotly.com/python/
+
 [11] JOBLIB. Joblib. Available in: https://joblib.readthedocs.io/en/latest/
+
 [12] SQLALCHEMY. SQLAlchemy. Available in: https://www.sqlalchemy.org
+
 [13] FLASK. Flask. Available in: https://flask.palletsprojects.com/en/2.0.x/
 
 # Original Project Instructions:
