@@ -1,7 +1,7 @@
 # Disaster Response Pipeline Project
 
 ## About this project:
-This is the second project from Udacity's Data Science Nanodegree. The objective is to develop an Extract Transform and Load pipeline and a Machine Learning pipeline for NLP.
+This is the second project from Udacity's Data Science Nanodegree. The objective is to develop an Extract, Transform and Load pipeline, a Machine Learning pipeline for NLP and a Web App for deployment.
 
 ## Installations:
 * [Python 3.9.1](https://www.python.org) [1]
@@ -19,28 +19,28 @@ This is the second project from Udacity's Data Science Nanodegree. The objective
 * [Flask](https://flask.palletsprojects.com/en/2.0.x/) [13]
 
 ## Folder descriptions:
-**app:** This folder contains the Flask app and the html pages.
+**app:** This folder contains the Flask app and the html templates.
 
-**data:** This folder contains the CSV raw files, the SQL database file generated after processing data and the script for processing data.
+**data:** This folder contains the CSV raw files, the SQL database file obtained after processing the data and the script for processing data.
 
-**draft_notebooks:** This folder contains a Draft Notebooks in which the web app plots were based.
+**draft_notebooks:** This folder contains a Jupyter Notebook in which the web app plots were based.
 
-**models** This folder contains the script for training the classifier. **Note:** The .pkl file generated during the developmet of this project wasn't tracked on Git, as it exceeded the 100 mb limit.
+**models** This folder contains the script for training the classifier. **Note:** The .pkl file generated during the developmet of this project wasn't tracked on Git, as it exceeded Git's file size limit. In this project, the GridSearchCV tested a limited set of parameters as the model selection could be significantly more demanding as the number of possible parameters increased, moreover, the GridSearchCV models trained with more parameters in the local machine presented a file size that exceeded Git's file size limit by a significant amount.
 
 ## How to interact with this project:
-**Data processing:** To process data, run the *process_data.py* script in the *data* folder. script requires the 3 arguments listed below in order to merge and clean the raw csv files and create a SQL database.
+**Data processing:** To process data, run the *process_data.py* script in the *data* folder. This script requires the 3 arguments listed below in order to merge and clean the raw CSV files and create a SQL database.
 * filepath for disaster_messages.csv
 * filepath for disaster_categories.csv
-* filepath including the .db file name for the outputted SQL database
+* filepath including the .db file name for the output SQL database
 
 **Model training:** To train a MultiOutputClassifier with Random Forest Classifiers, run the *train_classifier.py* script in the *models*. This script requires the following arguments:
 * filepath for the SQL database created with the *process_data.py* script
-* filepath including the .pkl file name for the outputted trained model. In case a trained model already exists in the informed filepath, the trained model will be loaded, without training a new model.
+* filepath including the .pkl file name to save the trained model. In case a trained model already exists in the informed filepath, the existing trained model will be loaded, without training a new model.
 
-**Web App:** To start the web app, run the *run.py* script in the *app* folder. A web app http address will be printed in the terminal. In this web app 2 visualization and a input based prediction feature were added.
+**Web App:** To start the web app, run the *run.py* script in the *app* folder. A web app http address will be printed in the terminal. In this Web App 2 visualizations and an input based prediction feature were added.
 * Visualization 1: the count of each category in the processed database.
-* Visualization 2: the feature importance for each of the models trained with the MultiOutputClassifier.
-* Input based prediction: a predicion applying the trained model will be performed based on the message inputed in the top of the page. The predicted categories will be highlighted in green.
+* Visualization 2: the top 40 most important features for each of the models trained with the MultiOutputClassifier.
+* Input based prediction: a predicion applying the trained model will be performed based on the message inputed on the top of the page. The predicted categories will be highlighted in green.
 
 ## References:
 [1] PYTHON. Python. Available in: https://www.python.org.
@@ -69,7 +69,7 @@ This is the second project from Udacity's Data Science Nanodegree. The objective
 
 [13] FLASK. Flask. Available in: https://flask.palletsprojects.com/en/2.0.x/
 
-# Original Project Instructions:
+# Project Instructions:
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
@@ -79,6 +79,6 @@ This is the second project from Udacity's Data Science Nanodegree. The objective
         `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
 
 2. Run the following command in the app's directory to run your web app.
-    `python run.py`
+    `python app/run.py`
 
 3. Go to http://0.0.0.0:3001/
