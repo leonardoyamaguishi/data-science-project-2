@@ -1,7 +1,9 @@
 # Disaster Response Pipeline Project
 
 ## About this project:
-This is the second project from Udacity's Data Science Nanodegree. The objective is to develop an Extract, Transform and Load pipeline, a Machine Learning pipeline for NLP and a Web App for deployment.
+This is the second project from Udacity's Data Science Nanodegree. The objective of this project is to develop an application to assist in the mobilization of government and humanitarian organizations in order to assess recent or occurring disasters and determine the immediate course of action by categorizing tweets and text messages compiled and provided by Figure Eight [14].
+
+The categorization is an output from a deployed Machine Learning model obtained by following an Extract, Transform and Load pipeline and a Machine Learning pipeline with the application of sklearn's GridSearchCV for model selection. The trained model is deployed in a Flask Web App.
 
 ## Installations:
 * [Python 3.9.1](https://www.python.org) [1]
@@ -68,6 +70,8 @@ This is the second project from Udacity's Data Science Nanodegree. The objective
 [12] SQLALCHEMY. SQLAlchemy. Available in: https://www.sqlalchemy.org
 
 [13] FLASK. Flask. Available in: https://flask.palletsprojects.com/en/2.0.x/
+
+[14] FIGURE EIGHT. Figure Eight. Available in: https://appen.com
 
 # Project Instructions:
 ### Instructions:
